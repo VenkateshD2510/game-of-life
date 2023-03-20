@@ -1,0 +1,24 @@
+	 stage('SonarQube analysis'){
+	when {
+    expression { 
+        params.action == 'apply'
+        
+    }
+}
+       steps {
+	     
+          withSonarQubeEnv('sonarqube') {
+  
+             bat "/C:/Softwares/sonar-scanner-4.1.0.1829-windows/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+             // /C:/Softwares/sonar-scanner-4.1.0.1829-windows/bin/sonar-scanner this path is in our local system path
+               }
+             }
+          }  //stage SonarQube analysis 
+	    
+		    stage('jfrog'){
+		when {
+    expression { 
+        params.action == 'apply'
+        
+    }
+}
